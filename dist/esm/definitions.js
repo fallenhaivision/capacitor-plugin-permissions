@@ -1,0 +1,7 @@
+export const PERMISSIONS = {
+    LOCATION_WHEN_IN_USE: "LOCATION_WHEN_IN_USE",
+    LOCATION_ALWAYS: "LOCATION_ALWAYS",
+    PHOTO_LIBRARY: "PHOTO_LIBRARY",
+    CAMERA: "CAMERA"
+};
+//# sourceMappingURL=definitions.js.map

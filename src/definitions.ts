@@ -12,5 +12,8 @@ export const PERMISSIONS = {
 };
 
 export interface PermissionsPlugin {
-  request(permission: string): Promise<{ status: string }>;
+  requestPermission(options: {
+    permission: string;
+  }): Promise<{ status: string }>;
+  getStatus(options: { permission: string }): Promise<{ status: string }>;
 }
