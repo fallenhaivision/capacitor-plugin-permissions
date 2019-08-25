@@ -7,7 +7,7 @@ export declare class PermissionsWeb extends WebPlugin implements PermissionsPlug
     }) => Promise<{
         status: string;
     }>;
-    getStatus: (options: {
+    checkStatus: (options: {
         permission: string;
     }) => Promise<{
         status: string;

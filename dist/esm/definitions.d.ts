@@ -15,7 +15,7 @@ export interface PermissionsPlugin {
     }): Promise<{
         status: string;
     }>;
-    getStatus(options: {
+    checkStatus(options: {
         permission: string;
     }): Promise<{
         status: string;

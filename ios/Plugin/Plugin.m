@@ -5,5 +5,5 @@
 // each method the plugin supports using the CAP_PLUGIN_METHOD macro.
 CAP_PLUGIN(Permissions, "Permissions",
            CAP_PLUGIN_METHOD(requestPermission, CAPPluginReturnPromise);
-           CAP_PLUGIN_METHOD(getStatus, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(checkStatus, CAPPluginReturnPromise);
 )

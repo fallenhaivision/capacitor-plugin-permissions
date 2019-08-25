@@ -15,5 +15,5 @@ export interface PermissionsPlugin {
   requestPermission(options: {
     permission: string;
   }): Promise<{ status: string }>;
-  getStatus(options: { permission: string }): Promise<{ status: string }>;
+  checkStatus(options: { permission: string }): Promise<{ status: string }>;
 }

@@ -18,7 +18,7 @@ export class PermissionsWeb extends WebPlugin {
                 status: options.permission
             };
         });
-        this.getStatus = (options) => __awaiter(this, void 0, void 0, function* () {
+        this.checkStatus = (options) => __awaiter(this, void 0, void 0, function* () {
             return {
                 status: options.permission
             };

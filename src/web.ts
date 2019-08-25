@@ -17,7 +17,7 @@ export class PermissionsWeb extends WebPlugin implements PermissionsPlugin {
     };
   };
 
-  getStatus = async (options: {
+  checkStatus = async (options: {
     permission: string;
   }): Promise<{ status: string }> => {
     return {

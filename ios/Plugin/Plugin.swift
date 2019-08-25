@@ -92,7 +92,7 @@ public class Permissions: CAPPlugin {
         
     }
     
-    @objc func getStatus(_ call: CAPPluginCall) {
+    @objc func checkStatus(_ call: CAPPluginCall) {
         let permission = call.getString("permission") ?? ""
         var status = "";
         switch (permission) {
