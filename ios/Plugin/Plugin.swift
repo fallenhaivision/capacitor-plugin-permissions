@@ -10,30 +10,6 @@ import Photos
 @objc(Permissions)
 public class Permissions: CAPPlugin {
     private let locationManager = CLLocationManager()
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization authorizationStatus: CLAuthorizationStatus, call: CAPPluginCall) {
-        var status = "";
-        switch (authorizationStatus) {
-            case.authorizedAlways:
-                status = "PHOTO_LIBRARY/AUTHORIZED_ALWAYS";
-                break;
-            case.authorizedWhenInUse:
-                status = "PHOTO_LIBRARY/AUTHORIZED_WHEN_IN_USE";
-                break;
-            case.denied:
-                status = "PHOTO_LIBRARY/DENIED";
-                break;
-            case.restricted:
-                status = "PHOTO_LIBRARY/RESTRICTED";
-                break;
-            case .notDetermined:
-                status = "PHOTO_LIBRARY/NOT_DETERMINED";
-                break;
-        }
-        call.resolve([
-            "status": status
-        ])
-        
-   }
     
     @objc func requestPermission(_ call: CAPPluginCall) {
         let permission = call.getString("permission") ?? ""
@@ -51,14 +27,11 @@ public class Permissions: CAPPlugin {
                         case .authorized:
                             status = "PHOTO_LIBRARY/AUTHORIZED";
                             break;
-                        case.denied:
+                    case.denied, .restricted:
                             status = "PHOTO_LIBRARY/DENIED";
                             break;
                         case.notDetermined:
                             status = "PHOTO_LIBRARY/NOT_DETERMINED";
-                            break;
-                        case .restricted:
-                            status = "PHOTO_LIBRARY/RESTRICTED";
                             break;
                     }
                     call.resolve([
@@ -67,14 +40,20 @@ public class Permissions: CAPPlugin {
                 }
             break;
             case "CAMERA":
-                
+                AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                    if granted {
+                        status = "CAMERA/AUTHORIZED";
+                    }
+                    else {
+                        status = "CAMERA/DENIED";
+                    }
+                    call.success([
+                        "status": status
+                    ])
+                }
             break;
             case "NOTIFICATION":
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-                    guard error == nil else {
-                        status = "NOTIFICATION/ERROR";
-                        return
-                    }
                     if granted {
                         status = "NOTIFICATION/AUTHORIZED";
                     }
@@ -104,11 +83,8 @@ public class Permissions: CAPPlugin {
                     case.authorizedWhenInUse:
                         status = "LOCATION/AUTHORIZED_WHEN_IN_USE";
                         break;
-                    case.denied:
+                    case.denied, .restricted:
                         status = "LOCATION/DENIED";
-                        break;
-                    case.restricted:
-                        status = "LOCATION/RESTRICTED";
                         break;
                     case .notDetermined:
                         status = "LOCATION/NOT_DETERMINED";
@@ -123,14 +99,11 @@ public class Permissions: CAPPlugin {
                     case .authorized:
                         status = "PHOTO_LIBRARY/AUTHORIZED";
                         break;
-                    case.denied:
+                    case.denied, .restricted:
                         status = "PHOTO_LIBRARY/DENIED";
                         break;
                     case.notDetermined:
                         status = "PHOTO_LIBRARY/NOT_DETERMINED";
-                        break;
-                    case .restricted:
-                        status = "PHOTO_LIBRARY/RESTRICTED";
                         break;
                 }
                 call.resolve([
@@ -138,7 +111,20 @@ public class Permissions: CAPPlugin {
                 ])
             break;
             case "CAMERA":
-                
+                switch (AVCaptureDevice.authorizationStatus(for: .video)) {
+                    case .authorized:
+                        status = "CAMERA/AUTHORIZED";
+                        break;
+                    case.denied, .restricted:
+                        status = "CAMERA/DENIED";
+                        break;
+                    case.notDetermined:
+                        status = "CAMERA/NOT_DETERMINED";
+                        break;
+                }
+                call.resolve([
+                    "status": status
+                ])
             break;
             case "NOTIFICATION":
                 UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
@@ -158,8 +144,6 @@ public class Permissions: CAPPlugin {
             break;
         default:
             status = "ERROR";
-        }
-        
+        }        
     }
 }
-
