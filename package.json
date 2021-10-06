@@ -41,9 +41,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/diiiary/capacitor-plugin-permissions.git"
+    "url": "https://github.com/fallenhaivision/capacitor-plugin-permissions.git"
   },
   "bugs": {
-    "url": "https://github.com/diiiary/capacitor-plugin-permissions.git/issues"
+    "url": "https://github.com/fallenhaivision/capacitor-plugin-permissions.git/issues"
   }
 }
