@@ -18,12 +18,15 @@ Supported Permissions:
 ## Install
 
 ```
-npm install capacitor-plugin-permissions
+npm install https://github.com/fallenhaivision/capacitor-plugin-permissions
 npx cap sync
 ```
 
 ## contants
 
+```javascript
+import "capacitor-plugin-permissions";
+```
 ```javascript
 const PERMISSIONS = [
   'CAMERA',
@@ -60,7 +63,7 @@ Request permissions
 ```javascript
 const response: {
   status: string
-} = await Capacitor.Plugins.PhotoLibrary.requestPermission({
+} = await Plugins.Permissions.requestPermission({
   permission: "CAMERA"
 });
 ```
@@ -72,7 +75,7 @@ Request permissions
 ```javascript
 const response: {
   status: string
-} = await Capacitor.Plugins.PhotoLibrary.checkStatus({
+} = await Plugins.Permissions.checkStatus({
   permission: "CAMERA"
 });
 ```
