@@ -26,14 +26,19 @@ public class Permissions: CAPPlugin {
                     switch (PHAuthorizationStatus) {
                         case .authorized:
                             status = "PHOTO_LIBRARY/AUTHORIZED";
-                            break;
+                            break
                     case.denied, .restricted:
                             status = "PHOTO_LIBRARY/DENIED";
-                            break;
+                            break
                         case.notDetermined:
                             status = "PHOTO_LIBRARY/NOT_DETERMINED";
-                            break;
-                    }
+                            break
+					case .limited:
+						status = "PHOTO_LIBRARY/LIMITED";
+						break
+					@unknown default:
+						break
+					}
                     call.resolve([
                         "status": status
                     ])
@@ -105,7 +110,12 @@ public class Permissions: CAPPlugin {
                     case.notDetermined:
                         status = "PHOTO_LIBRARY/NOT_DETERMINED";
                         break;
-                }
+					case .limited:
+						status = "PHOTO_LIBRARY/LIMITED";
+						break
+					@unknown default:
+						break
+				}
                 call.resolve([
                     "status": status
                 ])
@@ -114,14 +124,17 @@ public class Permissions: CAPPlugin {
                 switch (AVCaptureDevice.authorizationStatus(for: .video)) {
                     case .authorized:
                         status = "CAMERA/AUTHORIZED";
-                        break;
+                        break
                     case.denied, .restricted:
                         status = "CAMERA/DENIED";
-                        break;
+                        break
                     case.notDetermined:
                         status = "CAMERA/NOT_DETERMINED";
-                        break;
-                }
+                        break
+					@unknown default:
+						status = "CAMERA/DENIED";
+						break
+				}
                 call.resolve([
                     "status": status
                 ])
@@ -135,7 +148,11 @@ public class Permissions: CAPPlugin {
                             status = "NOTIFICATION/DENIED";
                         case .notDetermined:
                             status = "NOTIFICATION/NOT_DETERMINED";
-                        }
+						case .ephemeral:
+							break
+						@unknown default:
+							break
+					}
                         call.resolve([
                             "status": status
                         ])
