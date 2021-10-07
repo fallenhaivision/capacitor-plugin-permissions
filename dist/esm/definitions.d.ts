@@ -10,6 +10,11 @@ export declare const PERMISSIONS: {
     CAMERA: string;
 };
 export interface PermissionsPlugin {
+    requestPhotoAndCameraPermission(options: {
+        permission: string;
+    }): Promise<{
+        status: string;
+    }>;
     requestPermission(options: {
         permission: string;
     }): Promise<{

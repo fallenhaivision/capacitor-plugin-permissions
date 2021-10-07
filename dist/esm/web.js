@@ -13,6 +13,11 @@ export class PermissionsWeb extends WebPlugin {
             name: "Permissions",
             platforms: ["web"]
         });
+        this.requestPhotoAndCameraPermission = (options) => __awaiter(this, void 0, void 0, function* () {
+            return {
+                status: options.permission
+            };
+        });
         this.requestPermission = (options) => __awaiter(this, void 0, void 0, function* () {
             return {
                 status: options.permission

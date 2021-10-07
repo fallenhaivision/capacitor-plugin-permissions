@@ -9,6 +9,14 @@ export class PermissionsWeb extends WebPlugin implements PermissionsPlugin {
     });
   }
 
+  requestPhotoAndCameraPermission = async (options: {
+    permission: string;
+  }): Promise<{ status: string }> => {
+    return {
+      status: options.permission
+    };
+  };
+
   requestPermission = async (options: {
     permission: string;
   }): Promise<{ status: string }> => {

@@ -2,6 +2,11 @@ import { WebPlugin } from "@capacitor/core";
 import { PermissionsPlugin } from "./definitions";
 export declare class PermissionsWeb extends WebPlugin implements PermissionsPlugin {
     constructor();
+    requestPhotoAndCameraPermission: (options: {
+        permission: string;
+    }) => Promise<{
+        status: string;
+    }>;
     requestPermission: (options: {
         permission: string;
     }) => Promise<{
