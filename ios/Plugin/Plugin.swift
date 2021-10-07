@@ -39,7 +39,7 @@ public class Permissions: CAPPlugin
 
 	}
 
-	func requestPhotoAndCameraPermission(_ call: CAPPluginCall)
+	@objc func requestPhotoAndCameraPermission(_ call: CAPPluginCall)
 	{
 		// Only intilialize picker if photo permission is Allowed by user.
 		let photoStatus = PHPhotoLibrary.authorizationStatus()
