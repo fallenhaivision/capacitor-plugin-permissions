@@ -95,7 +95,7 @@ public class Permissions: CAPPlugin
 											call.resolve(["status": "NOT_DETERMINED"])
 											break
 										case .limited:
-											call.resolve(["status": "LIMITED"])
+											call.resolve(["status": "AUTHORIZED"])
 											break
 										@unknown default:
 											call.resolve(["status": "DENIED"])
